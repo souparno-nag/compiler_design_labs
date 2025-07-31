@@ -30,10 +30,11 @@ int main() {
     int f;
     printf("Enter no of final states: ");
     scanf("%d", &f);
-    char finals[f];
+    char *finals[f];
     for (int i = 0; i < f; i++){
-        printf("Enter final state no %d: ",(i+1));
-        scanf(" %c", &finals[i]);
+        finals[i] = malloc(MAX_LENGTH * sizeof(char));
+        printf("Enter final state no %d: ", (i + 1));
+        scanf("%s", finals[i]);
     }
     printf("Enter transitions: \n");
     char *delta[q][t];
@@ -41,6 +42,7 @@ int main() {
         for (int j = 0; j < t; j++) {
             delta[i][j] = malloc(MAX_LENGTH * sizeof(char));
             printf("d(%s,%c) : ",states[i],inputs[j]);
+            fflush(stdout);
             scanf("%s", delta[i][j]);
         }
     }
