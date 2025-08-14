@@ -1,0 +1,3 @@
+flex file_name.l
+gcc lex.yy.c -lfl
+./a.out input.txt
