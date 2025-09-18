@@ -339,3 +339,17 @@ int main() {
 
     return 0;
 }
+
+/*
+Enter the number of productions: 8
+Enter the productions (e.g., E->E+T, use '#' for epsilon):
+E->TX
+X->+TX
+X->#
+T->FY
+Y->*FY
+Y->#
+F->(E)
+F->i
+Enter the input string to parse (end with $): i*i+i$
+*/

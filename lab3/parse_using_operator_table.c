@@ -353,3 +353,15 @@ int main() {
 
     return 0;
 }
+
+/*
+Enter the number of productions: 6
+Enter the productions (e.g., E->E+T, use 'i' for id):
+E->E+T
+E->T
+T->T*F
+T->F
+F->(E)
+F->i
+Enter the string to parse (e.g., i+i): i+i*i
+*/
