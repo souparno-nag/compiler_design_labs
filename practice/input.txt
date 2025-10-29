@@ -1,0 +1,10 @@
+hello world old
+This is a test file.
+The hello word appears twice: hello.
+Programming in C is fun.
+LongestWordHereIsDefinitelyThisOne
+int count = 10;
+for(i=0; i<count; i++) {
+    hello++;
+}
+This is old.
