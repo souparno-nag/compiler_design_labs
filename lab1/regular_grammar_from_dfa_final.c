@@ -78,8 +78,7 @@ int main() {
     printf("Production, P: {\n");
     for (int i = 0; i < q; i++) {
         for (int j = 0; j < t; j++) {
-            printf("d(%s,%c) : ",states[i],inputs[j]);
-            printf("%s\n", delta[i][j]);
+            printf("%s -> %c%s\n",states[i],inputs[j], delta[i][j]);
         }
     }
     printf("}");
