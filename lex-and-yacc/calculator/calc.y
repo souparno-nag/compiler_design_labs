@@ -1,45 +1,37 @@
 %{
-    #include <stdio.h>
-    #include <stdlib.h>
-    extern int yylex();
-    void yyerror(char *msg); 
+#include <stdio.h>
+#include <stdlib.h>
+int yylex(void);
+int yyerror(const char *s);
 %}
 
-%union {
-    int f;
-}
-
-%token <f> NUM
-%type <f> E T F
+%token NUMBER
+%left '+' '-'
+%left '*' '/'
+%left UMINUS
 
 %%
+input:
+      /* empty */
+    | input expr '\n'   { printf("= %d\n", $2); }
+;
 
-S : E {printf("%d\n", $1);}
-  ;
-
-E : E '+' T {$$ = $1 + $3;}
-  | E '-' T {$$ = $1 - $3;}
-  | T {$$ = $1;}
-  ;
-
-T : T '*' F {$$ = $1 * $3;}
-  | T '/' F {$$ = $1 / $3;}
-  | F {$$ = $1;}
-  ;
-
-F : '(' E ')' {$$ = $2;}
-  | '-' F {$$ = -$2;}
-  | NUM {$$ = $1;}
-  ;
-
+expr:
+      expr '+' expr     { $$ = $1 + $3; }
+    | expr '-' expr     { $$ = $1 - $3; }
+    | expr '*' expr     { $$ = $1 * $3; }
+    | expr '/' expr     { $$ = $1 / $3; }
+    | '-' expr %prec UMINUS  { $$ = -$2; }
+    | '(' expr ')'      { $$ = $2; }
+    | NUMBER
+;
 %%
 
-void yyerror (char *msg) {
-    fprintf(stderr, "%s\n", msg);
-    exit(1);
+int yyerror(const char *s) {
+    printf("Syntax error\n");
+    return 0;
 }
 
 int main() {
-    yyparse();
-    return 0;
+    return yyparse();
 }
